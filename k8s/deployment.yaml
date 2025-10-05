@@ -13,6 +13,7 @@ spec:
       labels:
         app: mc
     spec:
+      hostNetwork: true
       securityContext:
         fsGroup: 1000
       containers:
