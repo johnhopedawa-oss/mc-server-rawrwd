@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mc-config
+  namespace: games
+data:
+  server.properties: |
+    max-players=20
+    motd=My Kubernetes Server
+    difficulty=normal
+    gamemode=survival
+    pvp=true
+    enable-command-block=true
+    spawn-protection=0
+  
+  ops.json: |
+    [
+      {
+        "uuid": "c3b7a837-b69d-4190-a9a6-5c82d0726acd",
+        "name": "waywardb0und",
+        "level": 4,
+        "bypassesPlayerLimit": false
+      }
+    ]
