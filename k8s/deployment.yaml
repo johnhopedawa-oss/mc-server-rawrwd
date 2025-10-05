@@ -30,6 +30,8 @@ spec:
               value: "PAPER"
             - name: MEMORY
               value: "4G"
+            - name: OPS
+              value: "waywardb0und"
           
           resources:
             requests:
