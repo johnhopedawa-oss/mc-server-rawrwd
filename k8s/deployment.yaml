@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mc
+  namespace: games
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mc
+  template:
+    metadata:
+      labels:
+        app: mc
+    spec:
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: server
+          image: itzg/minecraft-server:java21
+          ports:
+            - containerPort: 25565
+              name: minecraft
+          
+          env:
+            - name: EULA
+              value: "TRUE"
+            - name: TYPE
+              value: "PAPER"
+            - name: MEMORY
+              value: "4G"
+          
+          resources:
+            requests:
+              memory: "4Gi"
+              cpu: "1000m"
+            limits:
+              memory: "5Gi"
+              cpu: "2000m"
+          
+          volumeMounts:
+            - name: data
+              mountPath: /data
+          
+          livenessProbe:
+            tcpSocket:
+              port: 25565
+            initialDelaySeconds: 120
+            periodSeconds: 30
+            failureThreshold: 3
+          
+          readinessProbe:
+            tcpSocket:
+              port: 25565
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            failureThreshold: 3
+      
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: mc-data
