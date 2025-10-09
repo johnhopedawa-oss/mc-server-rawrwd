@@ -32,7 +32,9 @@ spec:
               value: "4G"
             - name: OPS
               value: "waywardb0und"
-          
+            - name: SEED
+              value: "109405673854"
+
           resources:
             requests:
               memory: "4Gi"
