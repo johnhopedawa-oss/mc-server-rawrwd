@@ -34,6 +34,8 @@ spec:
               value: "waywardb0und"
             - name: SEED
               value: "109405673854"
+            - name: SPAWN_PROTECTION
+              value: "0"
 
           resources:
             requests:
@@ -46,12 +48,6 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /data
-            - name: config
-              mountPath: /data/server.properties
-              subPath: server.properties
-            - name: config
-              mountPath: /data/ops.json
-              subPath: ops.json
           
           livenessProbe:
             tcpSocket:
@@ -71,6 +67,3 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: mc-data
-        - name: config
-          configMap:
-            name: mc-config
